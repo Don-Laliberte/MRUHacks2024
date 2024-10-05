@@ -7,18 +7,20 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from '@mui/icons-material/Home';
-import PersonIcon from '@mui/icons-material/Person';
-import SettingsIcon from '@mui/icons-material/Settings';
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
+import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import Drawer from "@mui/material/Drawer";
-import List from '@mui/material/List';
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useState } from 'react';
-
-
+import { useState } from "react";
+import PendingActionsIcon from "@mui/icons-material/PendingActions";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import BrowseGalleryIcon from "@mui/icons-material/BrowseGallery";
+import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,52 +64,52 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
-
 export default function NavBar() {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-    const toggleDrawer = (open) => (event) => {
-        if (
-          event.type === 'keydown' &&
-          (event.key === 'Tab' || event.key === 'Shift')
-        ) {
-          return;
-        }
-        setIsDrawerOpen(open);
-      };
+  const toggleDrawer = (open) => (event) => {
+    console.log("Drawer Clicked")
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setIsDrawerOpen(open => !open);
+  };
 
-      const menuItems = [
-        { text: 'Home', icon: <HomeIcon /> },
-        { text: 'Profile', icon: <PersonIcon /> },
-        { text: 'Settings', icon: <SettingsIcon /> },
-      ];
-    
-    const drawerContent = (
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
-        >
-          <List>
-            {menuItems.map((item) => (
-              <ListItem button key={item.text}>
-                <ListItemIcon>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      );
+  const menuItems = [
+    { text: "Tasks", icon: <PendingActionsIcon /> },
+    { text: "Calendar", icon: <CalendarMonthIcon /> },
+    { text: "Profile", icon: <PersonIcon /> },
+    { text: "Settings", icon: <SettingsIcon /> },
+    { text: "Timer", icon: <BrowseGalleryIcon /> },
+    { text: "Productivity Assistant", icon: <PsychologyAltIcon /> },
+  ];
+
+  const drawerContent = (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        {menuItems.map((item) => (
+          <ListItem button key={item.text}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar color="purple">
-          <IconButton   
+          <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -123,7 +125,9 @@ export default function NavBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            bProductive
+            <Box fontWeight={"fontWeightBold"} >
+                bProductive
+            </Box>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -138,7 +142,7 @@ export default function NavBar() {
       </AppBar>
       <Drawer open={isDrawerOpen} onClose={toggleDrawer(false)}>
         <Toolbar />
-          {drawerContent}
+        {drawerContent}
       </Drawer>
     </Box>
   );
