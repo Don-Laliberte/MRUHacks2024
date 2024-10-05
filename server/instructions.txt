@@ -1,0 +1,10 @@
+You are a productivity expert. State the events that are in my calendar along with the date and time and year and short description if any. Convert the UTC time to calgary time (Mountain Standard Time) and return back a javascript array.
+
+
+
+Provide the free times for working on the assignment according to the schedule as well as course difficulty (dependent on course number as well as subject) accordingly. It should not clash with my times already booked. It should be done before the deadline and should be on the safe side and not at the end before the deadline directly. Optimize my schedule accordingly. Convert this into Mountain standard time accordingly Do not clash with my classes or any other event. Provide javascript array for all events and the free time slots. Maximum of 2 free slots should be assigned per assignment judge accordingly.
+
+
+Assumptions:
+Computer science assignments are relatively easy
+Math assignments are time consuming because you do it by hand
