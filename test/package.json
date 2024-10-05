@@ -1,0 +1,27 @@
+{
+	"name": "calendar-assistant",
+	"version": "1.0.0",
+	"description": "A Kanban productivity assistant for scheduling and optimizing tasks",
+	"main": "calendarAssistantService.js",
+	"type": "module",
+	"scripts": {
+		"start": "node calendarAssistantService.js"
+	},
+	"dependencies": {
+		"axios": "^1.3.5",
+		"dotenv": "^16.0.0",
+		"events": "^3.3.0",
+		"express": "^4.21.0",
+		"file-type": "^16.5.0",
+		"ical": "^0.8.0",
+		"jsonwebtoken": "^9.0.0",
+		"luxon": "^3.5.0",
+		"multer": "^1.4.5-lts.1",
+		"node-cron": "^3.0.0",
+		"node-ical": "^0.19.0",
+		"openai": "^4.67.1",
+		"validator": "^13.12.0",
+		"winston": "^3.8.2",
+		"winston-daily-rotate-file": "^4.7.1"
+	}
+}
