@@ -43,11 +43,12 @@ export default function Column({
             />
           ) : (
             <Typography
-              variant="h6"
               onClick={() => onTitleClick(columnId)}
               sx={{ cursor: 'pointer', flexGrow: 1, mr: 1 }}
             >
-              {column.title}
+              <Box variant="h6">
+                {column.title}
+              </Box>
             </Typography>
           )}
           <IconButton onClick={() => onAddCard(columnId)} size="small">
@@ -69,7 +70,7 @@ export default function Column({
                 overflowY: 'auto',
               }}
             >
-              {column.items.map((item, index) => (
+              {column.items && column.items.map((item, index) => (
                 <Card 
                   key={item.id} 
                   item={item} 

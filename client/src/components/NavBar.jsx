@@ -22,8 +22,8 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { useState } from "react";
 import AiAssistant from "./AiAssistant";
-import Countdown from "./Countdown";
-
+import Countdown from "./timer/Countdown";
+import CountdownModal from "./timer/CountdownModal";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,11 +67,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar({toggleMenus}) {
+export default function NavBar({toggleMenus, aiChat, addTimer}) {
   const [isMenuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [isAiDrawerOpen, setAiDrawerOpen] = useState(false);
-  const [isTimerModelOpen, setTimerModalOpen] = useState(false);
-
+  const [isTimerModalOpen, setTimerModalOpen] = useState(false);
 
   const toggleMenuDrawer = (open) => (event) => {
     if (
@@ -83,14 +82,8 @@ export default function NavBar({toggleMenus}) {
     setMenuDrawerOpen((open) => !open);
   };
 
-  const toggleTimerModal = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setTimerModalOpen((open) => !open);
+  const toggleTimerModal = () => {
+    setTimerModalOpen((prev) => !prev);
   };
 
   const toggleAiDrawer = (open) => (event) => {
@@ -103,13 +96,12 @@ export default function NavBar({toggleMenus}) {
     setAiDrawerOpen((open) => !open);
   };
 
-
   const menuItems = [
     { text: "Tasks", icon: <PendingActionsIcon  /> , buttonHandler:toggleMenus(true, "Tasks")},
-    { text: "Calendar", icon: <CalendarMonthIcon  />, buttonHandler:toggleMenus(true, "Calendar")},
+    { text: "Calendar", icon: <CalendarMonthIcon />, buttonHandler:toggleMenus(true, "Calendar")},
     { text: "Profile", icon: <PersonIcon  />, buttonHandler:toggleMenus(true, "Profile")},
     { text: "Settings", icon: <SettingsIcon  /> , buttonHandler:toggleMenus(true, "Settings")},
-    { text: "Timer", icon: <BrowseGalleryIcon />, buttonHandler:toggleTimerModal(true, "Timer"),},
+    { text: "Timer", icon: <BrowseGalleryIcon />, buttonHandler: addTimer },
     { text: "Productivity Assistant", icon: <PsychologyAltIcon />, buttonHandler:toggleAiDrawer(true, "Ai"),},
   ];
 
@@ -172,8 +164,8 @@ export default function NavBar({toggleMenus}) {
         <Toolbar />
         {drawerContent}
       </Drawer>
-      <Countdown open={isTimerModelOpen} toggleTimerModal={toggleTimerModal}></Countdown>
-      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer}></AiAssistant>
+      <CountdownModal open={isTimerModalOpen} onClose={toggleTimerModal} />
+      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer} aiChat={aiChat}></AiAssistant>
     </Box>
   );
 }
