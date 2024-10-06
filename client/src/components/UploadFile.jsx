@@ -17,7 +17,17 @@ function UploadFile() {
     axios.post("http://localhost:3000/api/upload", fd)
       .then((response) => {
         console.log(response.data)
-// resonse.data is the array, use the data
+//this returns the array
+      })
+      .catch((error) => {
+        console.error("Error uploading file:", error);
+      });
+
+
+      axios.post("http://localhost:3000/api/gptresponse", fd)
+      .then((response) => {
+        console.log(response.data)
+//this returns the parsed chat gpt data
       })
       .catch((error) => {
         console.error("Error uploading file:", error);

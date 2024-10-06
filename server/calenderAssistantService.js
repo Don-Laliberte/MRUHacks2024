@@ -7,33 +7,12 @@ const { DateTime } = require('luxon');
 const { type } = require('os');
 dotenv.config();
 
-module.exports = function gptSender(filePath, res) {
+module.exports = async function gptSender(filePath, res, oneortwo) {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
+  console.log(oneortwo)
 
-  function stringToArray(str) {
-    // Remove any leading/trailing whitespace and the outer square brackets
-    str = str.trim().replace(/^\[|\]$/g, '');
-
-    // Split the string into individual object strings
-    const objectStrings = str.split(/},\s*{/);
-
-    return objectStrings.map(objStr => {
-      // Ensure each object string starts with '{' and ends with '}'
-      objStr = objStr.trim();
-      if (!objStr.startsWith('{')) objStr = '{' + objStr;
-      if (!objStr.endsWith('}')) objStr += '}';
-
-      try {
-        // Parse the object string as JSON
-        return JSON.parse(objStr);
-      } catch (error) {
-        console.error(`Error parsing object: ${objStr}`);
-        return null;
-      }
-    }).filter(obj => obj !== null); // Remove any null entries
-  }
 
   class CalendarAssistantService {
     constructor() {
@@ -60,18 +39,23 @@ module.exports = function gptSender(filePath, res) {
       try {
         const events = await this.parseICSFile(filePath);
         const eventsData = this.formatEventsData(events);
-        
-        res.send(eventsData)
+        console.log(oneortwo, "AYYAAYYAYAYAYYAAA TESTTTT ")
+        if (oneortwo === 2) {
+          //console.log("made ittt!!!", oneortwo)
+          res.send(eventsData)
+        }
         const messageContent = `Here is my calendar data in JSON format:\n\n${JSON.stringify(eventsData, null, 2)}\n\n${prompt}`;
 
-        //await this.addMessageToThread(this.thread.id, { role: 'user', content: messageContent });
-        //await this.streamRun(this.thread.id, this.assistant.id);
-
+        await this.addMessageToThread(this.thread.id, { role: 'user', content: messageContent });
+        let result2 = await this.streamRun(this.thread.id, this.assistant.id);
         // // const secondPrompt = "Please provide JavaScript single array of the free slots for assignment deadlines based on the calendar data.";
-        // const secondPrompt = "Please provide only the time slots where I can work on the assignments, add subject name, start datetime and end datetime to it. Only display the array without the let assignment";
+        const secondPrompt = "Please provide only the time slots where I can work on the assignments, add subject name, start datetime and end datetime to it. It should not be code. Be straightforward.";
 
-        // await this.addMessageToThread(this.thread.id, { role: 'user', content: secondPrompt });
-        // let result1 = await this.streamRun(this.thread.id, this.assistant.id);
+        await this.addMessageToThread(this.thread.id, { role: 'user', content: secondPrompt });
+        let result1 = await this.streamRun(this.thread.id, this.assistant.id);
+        console.log(result1)
+        res.send(result1)
+
         // result1 = result1.split('[object Object]')[1];
         // const regex = /\[([\s\S]*?)\]/;
         // const match = result1.match(regex);
@@ -79,12 +63,12 @@ module.exports = function gptSender(filePath, res) {
         //   const arrayContent = match[1];
         //   console.log('Extracted array content:', `[${arrayContent}]`);
         //   // If you need the array as a JavaScript object:
-          // const arrayObject = JSON.parse(`[${arrayContent}]`);
-          // console.log('Array as object:', arrayObject);
+        // const arrayObject = JSON.parse(`[${arrayContent}]`);
+        // console.log('Array as object:', arrayObject);
 
-          //const arrayObject = stringToArray(arrayContent);
-          //console.log('Array as object:', arrayObject);
-        
+        //const arrayObject = stringToArray(arrayContent);
+        //console.log('Array as object:', arrayObject);
+
       } catch (error) {
         console.error(`Error processing user request: ${error.message}`);
         throw error;
@@ -154,7 +138,17 @@ module.exports = function gptSender(filePath, res) {
             reject(error);
           })
           .on('end', () => {
-            // Here, send the result to the frontend or handle it as needed
+            if (oneortwo === 1) {
+              try {
+                console.log('modified')
+                result = result.replace(/\[object Object\]/g, "")
+                res.send(result)
+              } catch (e) {
+
+              }
+
+              // Here, send the result to the frontend or handle it as needed
+            }
 
             // You can now return this result or send it to the frontend as needed
             resolve(result);
@@ -179,4 +173,5 @@ module.exports = function gptSender(filePath, res) {
       console.error('Error:', error);
     }
   })();
+
 };
