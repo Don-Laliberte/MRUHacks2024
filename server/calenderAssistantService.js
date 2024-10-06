@@ -41,20 +41,21 @@ module.exports = async function gptSender(filePath, res, oneortwo) {
         const eventsData = this.formatEventsData(events);
         console.log(oneortwo, "AYYAAYYAYAYAYYAAA TESTTTT ")
         if (oneortwo === 2) {
-          //console.log("made ittt!!!", oneortwo)
+          console.log("made ittt!!!", oneortwo)
           res.send(eventsData)
         }
         const messageContent = `Here is my calendar data in JSON format:\n\n${JSON.stringify(eventsData, null, 2)}\n\n${prompt}`;
 
         await this.addMessageToThread(this.thread.id, { role: 'user', content: messageContent });
         let result2 = await this.streamRun(this.thread.id, this.assistant.id);
+        console.log(result2)
+        console.log()
         // // const secondPrompt = "Please provide JavaScript single array of the free slots for assignment deadlines based on the calendar data.";
-        const secondPrompt = "Please provide only the time slots where I can work on the assignments, add subject name, start datetime and end datetime to it. It should not be code. Be straightforward.";
+        const secondPrompt = "Please provide only the time slots where I can work on the assignments, add subject name, start datetime and end datetime to it. It should not be code";
 
         await this.addMessageToThread(this.thread.id, { role: 'user', content: secondPrompt });
         let result1 = await this.streamRun(this.thread.id, this.assistant.id);
         console.log(result1)
-        res.send(result1)
 
         // result1 = result1.split('[object Object]')[1];
         // const regex = /\[([\s\S]*?)\]/;
