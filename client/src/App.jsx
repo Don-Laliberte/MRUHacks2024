@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
+import KanbanBoard from "./components/KanbanBoard.jsx";
 
 function App() {
   const [isTasksMenuOpen, setTasksMenuOpen] = useState(true);
