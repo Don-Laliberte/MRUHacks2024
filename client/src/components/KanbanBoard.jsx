@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from './Column';
+import Box from "@mui/material/Box";
 import '../assets/KanbanStyles.css';
 
 const generateId = () => `_${Math.random().toString(36).substr(2, 9)}`;
@@ -118,13 +119,10 @@ export default function KanbanBoard() {
   };
 
   return (
-    <div className="kanban-container">
-      <div className="kanban-header">
-        <h1>Kanban Board</h1>
-      </div>
+    <Box className="kanban-container">
       
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="columns-container">
+        <Box className="columns-container">
           {Object.entries(columns).map(([columnId, column]) => (
             <Column
               key={columnId}
@@ -142,19 +140,19 @@ export default function KanbanBoard() {
           {Object.keys(columns).length < 6 && (
             <button className="add-column-button" onClick={addColumn}>+</button>
           )}
-        </div>
+        </Box>
       </DragDropContext>
 
       {Object.keys(columns).length === 0 && (
-        <div className="empty-board" onClick={addColumn}>
-          <div className="large-plus">+</div>
-        </div>
+        <Box className="empty-board" onClick={addColumn}>
+          <Box className="large-plus">+</Box>
+        </Box>
       )}
 
       {/* Sidebar for Card Details */}
-      <div className={`sidebar ${selectedCard ? 'open' : ''}`}>
+      <Box className={`sidebar ${selectedCard ? 'open' : ''}`}>
         {/* ... existing sidebar code ... */}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
