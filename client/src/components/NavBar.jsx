@@ -67,7 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar({toggleMenus}) {
+export default function NavBar({toggleMenus, aiData}) {
   const [isMenuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [isAiDrawerOpen, setAiDrawerOpen] = useState(false);
   const [isTimerModelOpen, setTimerModalOpen] = useState(false);
@@ -106,7 +106,7 @@ export default function NavBar({toggleMenus}) {
 
   const menuItems = [
     { text: "Tasks", icon: <PendingActionsIcon  /> , buttonHandler:toggleMenus(true, "Tasks")},
-    { text: "Calendar", icon: <CalendarMonthIcon  />, buttonHandler:toggleMenus(true, "Calendar")},
+    { text: "Calendar", icon: <CalendarMonthIcon />, buttonHandler:toggleMenus(true, "Calendar")},
     { text: "Profile", icon: <PersonIcon  />, buttonHandler:toggleMenus(true, "Profile")},
     { text: "Settings", icon: <SettingsIcon  /> , buttonHandler:toggleMenus(true, "Settings")},
     { text: "Timer", icon: <BrowseGalleryIcon />, buttonHandler:toggleTimerModal(true, "Timer"),},
@@ -173,7 +173,7 @@ export default function NavBar({toggleMenus}) {
         {drawerContent}
       </Drawer>
       <Countdown open={isTimerModelOpen} toggleTimerModal={toggleTimerModal}></Countdown>
-      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer}></AiAssistant>
+      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer} aiData={aiData}></AiAssistant>
     </Box>
   );
 }

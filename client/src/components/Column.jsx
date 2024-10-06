@@ -47,7 +47,9 @@ export default function Column({
               onClick={() => onTitleClick(columnId)}
               sx={{ cursor: 'pointer', flexGrow: 1, mr: 1 }}
             >
-              {column.title}
+              <Box>
+                {column.title}
+              </Box>
             </Typography>
           )}
           <IconButton onClick={() => onAddCard(columnId)} size="small">

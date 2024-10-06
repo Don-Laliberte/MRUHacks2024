@@ -15,7 +15,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import DeleteIcon from '@mui/icons-material/Delete';
+import UploadFile from './UploadFile';
 import Column from './Column';
 
 const COLUMN_WIDTH = 280; // Fixed width for columns
@@ -48,7 +48,7 @@ const initialColumns = {
   }
 };
 
-export default function KanbanBoard() {
+export default function KanbanBoard(aiData,setAiData) {
   const [columns, setColumns] = useState(initialColumns);
   const [selectedCard, setSelectedCard] = useState(null);
   const [editingColumnId, setEditingColumnId] = useState(null);
@@ -187,6 +187,12 @@ export default function KanbanBoard() {
     }));
     setSelectedCard(null);
   }, []);
+
+  const addAiData = () => {
+    if (aiData != null) {
+      
+    }
+  }
 
   return (
     <Container maxWidth={false} disableGutters ref={containerRef}>

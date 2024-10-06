@@ -12,6 +12,7 @@ function App() {
   const [isCalendarMenuOpen, setCalendarMenuOpen] = useState(false);
   const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
   const [isSettingsMenuOpen, setSettingsMenuOpen] = useState(false);
+  const [aiData, setAiData] = useState(null);
 
   const toggleMenus = (open, id) => (event) => {
     if (
@@ -51,7 +52,7 @@ function App() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
-      <NavBar toggleMenus={toggleMenus} />
+      <NavBar toggleMenus={toggleMenus} aiData={aiData}/>
       <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>
         <Box sx={[
           { 
@@ -61,12 +62,12 @@ function App() {
           },
           !isTasksMenuOpen && { display: "none" }
         ]}>
-          <KanbanBoard />
+          <KanbanBoard setAiData={setAiData} aiData={aiData} />
         </Box>
         <Box
           sx={[!isCalendarMenuOpen && { display: "none" }]}
         >
-          <UploadFile />
+          <UploadFile setAiData={setAiData} aiData={aiData} />
         </Box>
         <Box
           fontSize={500}
