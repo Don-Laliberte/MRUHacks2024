@@ -6,7 +6,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import KanbanBoard from "./components/KanbanBoard.jsx";
 
-
 function App() {
   const [isTasksMenuOpen, setTasksMenuOpen] = useState(true);
   const [isCalendarMenuOpen, setCalendarMenuOpen] = useState(false);
@@ -82,7 +81,7 @@ function App() {
           Settings
         </Box>
       </Box>
-    <Box>
+    </Box>
   );
 }
 
