@@ -22,8 +22,6 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { useState } from "react";
 import AiAssistant from "./AiAssistant";
-import Countdown from "./Countdown";
-
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -136,7 +134,8 @@ export default function NavBar({toggleMenus}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        sx={{position:"fixed",zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar color="purple">
           <IconButton
@@ -172,7 +171,6 @@ export default function NavBar({toggleMenus}) {
         <Toolbar />
         {drawerContent}
       </Drawer>
-      <Countdown open={isTimerModelOpen} toggleTimerModal={toggleTimerModal}></Countdown>
       <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer}></AiAssistant>
     </Box>
   );
