@@ -2,10 +2,17 @@ import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import { Typography } from "@mui/material";
-import ReactMarkdown from "react-markdown";
+import Markdown from "react-markdown";
 import Box from "@mui/material/Box";
 
 export default function AiAssistant({ open, toggleAiDrawer, aiChat }) {
+
+  const markdownText = typeof aiChat === 'string' 
+    ? aiChat 
+    : Array.isArray(aiChat) 
+      ? aiChat.join('')  // Join array elements without comma
+      : '';
+    
   return (
     <Drawer
       anchor="right"
@@ -29,13 +36,9 @@ export default function AiAssistant({ open, toggleAiDrawer, aiChat }) {
       >
         Personal Productivity Assistant
       </Typography>
-      <Typography>
-        <Box>
-          {aiChat}
-        </Box>
-      </Typography>
-
+      <Box>
+        <Typography><Markdown>{`${markdownText}`}</Markdown></Typography>
+      </Box>
     </Drawer>
   );
 }
-      
