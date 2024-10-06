@@ -10,14 +10,13 @@ import {
   Fab,
   Button,
   useTheme,
-  useMediaQuery
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import Column from './Column';
-import ReplyAllIcon from '@mui/icons-material/ReplyAll';
-
+  useMediaQuery,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import Column from "./Column";
+import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 
 const COLUMN_WIDTH = 280; // Fixed width for columns
 const COLUMN_GAP = 24; // Gap between columns
@@ -49,7 +48,7 @@ const initialColumns = {
   },
 };
 
-export default function KanbanBoard({aiData}) {
+export default function KanbanBoard({ aiData }) {
   const [columns, setColumns] = useState(initialColumns);
   const [selectedCard, setSelectedCard] = useState(null);
   const [editingColumnId, setEditingColumnId] = useState(null);
@@ -104,7 +103,6 @@ export default function KanbanBoard({aiData}) {
       },
     }));
   }
-
 
   const removeColumn = () => {
     if (Object.keys(columns).length <= 0) return;
@@ -229,7 +227,15 @@ export default function KanbanBoard({aiData}) {
       let newColumnId = generateId();
       addAiColumn(newColumnId);
       console.log(aiData);
-      aiData.map(data => addAiCard(newColumnId,data.summary,"Click to Edit", data.start, data.end));
+      aiData.map((data) =>
+        addAiCard(
+          newColumnId,
+          data.summary,
+          "Click to Edit",
+          data.start,
+          data.end
+        )
+      );
     }
   };
 
@@ -324,7 +330,7 @@ export default function KanbanBoard({aiData}) {
             )}
           {Object.keys(columns).length > 0 && (
             <Fab
-              color="secondary"
+              color="#secondary"
               size="large"
               aria-label="remove"
               onClick={removeColumn}
@@ -334,7 +340,7 @@ export default function KanbanBoard({aiData}) {
           )}
           {Object.keys(columns).length > 0 && (
             <Fab
-              color="third"
+              color=""
               size="large"
               aria-label="remove"
               onClick={addAiData}

@@ -11,7 +11,7 @@ const Card = ({ item, index, onClick }) => (
         {...provided.dragHandleProps}
         elevation={snapshot.isDragging ? 6 : 1}
         sx={{
-          p: 3,
+          p: 2.5,
           mb: 1,
           backgroundColor: snapshot.isDragging ? 'action.selected' : 'background.paper',
           border: 'thick double',
