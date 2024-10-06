@@ -5,8 +5,9 @@ const cors = require("cors");
 const chatgptRouter = require("./routes/chatgpt")
 const PORT = process.env.PORT;
 const app = express();
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:5173",
+  methods: ["GET", "POST"]
 };
 
 app.use(cors(corsOptions));
