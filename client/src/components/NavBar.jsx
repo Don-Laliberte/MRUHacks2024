@@ -7,20 +7,21 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
-import PersonIcon from "@mui/icons-material/Person";
-import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { useState } from "react";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BrowseGalleryIcon from "@mui/icons-material/BrowseGallery";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PersonIcon from "@mui/icons-material/Person";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+
+import { useState } from "react";
+import AiAssistant from "./AiAssistant";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,41 +65,66 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+export default function NavBar({toggleMenus}) {
+  const [isMenuDrawerOpen, setMenuDrawerOpen] = useState(false);
+  const [isAiDrawerOpen, setAiDrawerOpen] = useState(false);
+  const [isTimerModelOpen, setTimerModalOpen] = useState(false);
 
-  const toggleDrawer = (open) => (event) => {
-    console.log("Drawer Clicked")
+
+  const toggleMenuDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
       return;
     }
-    setIsDrawerOpen(open => !open);
+    setMenuDrawerOpen((open) => !open);
   };
 
+  const toggleTimerModal = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setTimerModalOpen((open) => !open);
+  };
+
+  const toggleAiDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setAiDrawerOpen((open) => !open);
+  };
+
+
   const menuItems = [
-    { text: "Tasks", icon: <PendingActionsIcon /> },
-    { text: "Calendar", icon: <CalendarMonthIcon /> },
-    { text: "Profile", icon: <PersonIcon /> },
-    { text: "Settings", icon: <SettingsIcon /> },
-    { text: "Timer", icon: <BrowseGalleryIcon /> },
-    { text: "Productivity Assistant", icon: <PsychologyAltIcon /> },
+    { text: "Tasks", icon: <PendingActionsIcon  /> , buttonHandler:toggleMenus(true, "Tasks")},
+    { text: "Calendar", icon: <CalendarMonthIcon  />, buttonHandler:toggleMenus(true, "Calendar")},
+    { text: "Profile", icon: <PersonIcon  />, buttonHandler:toggleMenus(true, "Profile")},
+    { text: "Settings", icon: <SettingsIcon  /> , buttonHandler:toggleMenus(true, "Settings")},
+    { text: "Timer", icon: <BrowseGalleryIcon />, buttonHandler:toggleMenus(true)},
+    { text: "Productivity Assistant", icon: <PsychologyAltIcon />, buttonHandler:toggleMenus(true)},
   ];
 
   const drawerContent = (
     <Box
       sx={{ width: 250 }}
       role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
+      onClick={toggleMenuDrawer(false)}
+      onKeyDown={toggleMenuDrawer(false)}
     >
       <List>
         {menuItems.map((item) => (
-          <ListItem button key={item.text}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
+          <ListItem button onClick={item.buttonHandler} key={item.text}>
+            <ListItemIcon  >
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText  primary={item.text} />
           </ListItem>
         ))}
       </List>
@@ -107,7 +133,10 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
         <Toolbar color="purple">
           <IconButton
             size="large"
@@ -115,7 +144,7 @@ export default function NavBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-            onClick={toggleDrawer(true)}
+            onClick={toggleMenuDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -125,9 +154,7 @@ export default function NavBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Box fontWeight={"fontWeightBold"} >
-                bProductive
-            </Box>
+            <Box fontWeight={"fontWeightBold"}>bProductive</Box>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -140,10 +167,11 @@ export default function NavBar() {
           </Search>
         </Toolbar>
       </AppBar>
-      <Drawer open={isDrawerOpen} onClose={toggleDrawer(false)}>
+      <Drawer open={isMenuDrawerOpen} onClose={toggleMenuDrawer(false)}>
         <Toolbar />
         {drawerContent}
       </Drawer>
+      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer}></AiAssistant>
     </Box>
   );
 }
