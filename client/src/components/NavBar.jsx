@@ -67,7 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar({toggleMenus, aiData, addTimer}) {
+export default function NavBar({toggleMenus, aiChat, addTimer}) {
   const [isMenuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [isAiDrawerOpen, setAiDrawerOpen] = useState(false);
   const [isTimerModalOpen, setTimerModalOpen] = useState(false);
@@ -165,7 +165,7 @@ export default function NavBar({toggleMenus, aiData, addTimer}) {
         {drawerContent}
       </Drawer>
       <CountdownModal open={isTimerModalOpen} onClose={toggleTimerModal} />
-      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer} aiData={aiData}></AiAssistant>
+      <AiAssistant open={isAiDrawerOpen} toggleAiDrawer={toggleAiDrawer} aiChat={aiChat}></AiAssistant>
     </Box>
   );
 }

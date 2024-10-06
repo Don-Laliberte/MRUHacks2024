@@ -14,6 +14,7 @@ function App() {
 
   const [file, setFile] = useState(null);
   const [aiData, setAiData] = useState([]);
+  const [aiChat, setAiChat] = useState();
   const timerManagerRef = useRef();
 
   const toggleMenus = (open, id) => (event) => {
@@ -81,6 +82,7 @@ function App() {
       axios.post("http://localhost:3000/api/gptresponse", fd)
       .then((response) => {
         console.log(response.data)
+        setAiChat([...response.data])
       })
       
  
@@ -90,7 +92,7 @@ function App() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
-      <NavBar toggleMenus={toggleMenus} aiData={aiData} addTimer={addTimer} />
+      <NavBar toggleMenus={toggleMenus} aiChat={aiChat} addTimer={addTimer} />
 
       <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>
         <Box

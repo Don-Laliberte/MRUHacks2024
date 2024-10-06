@@ -49,7 +49,7 @@ const initialColumns = {
   },
 };
 
-export default function KanbanBoard(aiData) {
+export default function KanbanBoard({aiData}) {
   const [columns, setColumns] = useState(initialColumns);
   const [selectedCard, setSelectedCard] = useState(null);
   const [editingColumnId, setEditingColumnId] = useState(null);
@@ -105,18 +105,6 @@ export default function KanbanBoard(aiData) {
     }));
   }
 
-  function appendColumn(data) {
-    if (Object.keys(columns).length >= 7) return;
-
-    setColumns((prev) => ({
-      ...prev,
-      [data.id]: {
-        id: data.id,
-        title: data.title,
-        items: data.items,
-      },
-    }));
-  }
 
   const removeColumn = () => {
     if (Object.keys(columns).length <= 0) return;
@@ -240,7 +228,6 @@ export default function KanbanBoard(aiData) {
       setColumns(null);
       let newColumnId = generateId();
       addAiColumn(newColumnId);
-      appendColumn(placeHolderColumns);
       console.log(aiData);
       aiData.map(data => addAiCard(newColumnId,data.summary,"Click to Edit", data.start, data.end));
     }
