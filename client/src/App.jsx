@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 import NavBar from "./components/navbar";
 import { Typography } from "@mui/material";
 import { useState } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import KanbanBoard from "./components/KanbanBoard";
 
 
 function App() {
@@ -48,10 +50,11 @@ function App() {
 
   return (
     <Box>
+      <CssBaseline/>
       <NavBar toggleMenus = {toggleMenus} ></NavBar>
       <Typography>
-        <Box fontSize={500} sx={[!isTasksMenuOpen && { display:'none'}]}>
-          Tasks
+        <Box  sx={[!isTasksMenuOpen && { display:'none'}]}>
+          <KanbanBoard></KanbanBoard>
         </Box>
         <Box fontSize={500} sx={[!isCalendarMenuOpen && { display:'none'}]}>
           Calendar
