@@ -107,8 +107,8 @@ export default function NavBar({toggleMenus}) {
     { text: "Calendar", icon: <CalendarMonthIcon  />, buttonHandler:toggleMenus(true, "Calendar")},
     { text: "Profile", icon: <PersonIcon  />, buttonHandler:toggleMenus(true, "Profile")},
     { text: "Settings", icon: <SettingsIcon  /> , buttonHandler:toggleMenus(true, "Settings")},
-    { text: "Timer", icon: <BrowseGalleryIcon />, buttonHandler:toggleMenus(true)},
-    { text: "Productivity Assistant", icon: <PsychologyAltIcon />, buttonHandler:toggleMenus(true)},
+    { text: "Timer", icon: <BrowseGalleryIcon />, buttonHandler:toggleTimerModal(true, "Timer"),},
+    { text: "Productivity Assistant", icon: <PsychologyAltIcon />, buttonHandler:toggleAiDrawer(true, "Ai"),},
   ];
 
   const drawerContent = (
