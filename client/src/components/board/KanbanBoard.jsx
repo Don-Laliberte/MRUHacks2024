@@ -330,7 +330,7 @@ export default function KanbanBoard({ aiData }) {
             )}
           {Object.keys(columns).length > 0 && (
             <Fab
-              color="#secondary"
+              color="error"
               size="large"
               aria-label="remove"
               onClick={removeColumn}
