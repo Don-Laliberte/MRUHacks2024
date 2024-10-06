@@ -1,0 +1,15 @@
+/Users/donhl/Documents/Vscode Projects/MRUHacks2024/MRUHacks2024/server/routes/chatgpt.js:6
+const route = Router();
+              ^
+
+TypeError: Router is not a function
+    at Object.<anonymous> (/Users/donhl/Documents/Vscode Projects/MRUHacks2024/MRUHacks2024/server/routes/chatgpt.js:6:15)
+    at Module._compile (node:internal/modules/cjs/loader:1233:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1287:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at Module.require (node:internal/modules/cjs/loader:1115:19)
+    at require (node:internal/modules/helpers:130:18)
+    at Object.<anonymous> (/Users/donhl/Documents/Vscode Projects/MRUHacks2024/MRUHacks2024/server/server.js:5:23)
+    at Module._compile (node:internal/modules/cjs/loader:1233:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1287:10)

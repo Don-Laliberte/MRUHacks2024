@@ -5,6 +5,7 @@ import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import KanbanBoard from "./components/KanbanBoard.jsx";
+import UploadFile from "./components/UploadFile.jsx";
 
 function App() {
   const [isTasksMenuOpen, setTasksMenuOpen] = useState(true);
@@ -63,10 +64,9 @@ function App() {
           <KanbanBoard />
         </Box>
         <Box
-          fontSize={500}
           sx={[!isCalendarMenuOpen && { display: "none" }]}
         >
-          Calendar
+          <UploadFile></UploadFile>
         </Box>
         <Box
           fontSize={500}
