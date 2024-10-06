@@ -66,7 +66,7 @@ function App() {
         <Box
           sx={[!isCalendarMenuOpen && { display: "none" }]}
         >
-          <UploadFile></UploadFile>
+          <UploadFile />
         </Box>
         <Box
           fontSize={500}
