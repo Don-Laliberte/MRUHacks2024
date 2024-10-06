@@ -10,13 +10,15 @@ import {
   Fab,
   Button,
   useTheme,
-  useMediaQuery,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import Column from "./Column";
+  useMediaQuery
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import UploadFile from '../UploadFile';
+import Column from './Column';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
+
 
 const COLUMN_WIDTH = 280; // Fixed width for columns
 const COLUMN_GAP = 24; // Gap between columns

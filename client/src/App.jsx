@@ -1,19 +1,23 @@
 import Box from "@mui/material/Box";
-import NavBar from "./components/navbar";
+import NavBar from "./components/NavBar";
 import { Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
-import KanbanBoard from "./components/KanbanBoard.jsx";
 import axios from "axios";
+import KanbanBoard from "./components/board/KanbanBoard.jsx";
+import UploadFile from "./components/UploadFile.jsx";
+import TimerManager from "./components/timer/TimerManager.jsx";
 
 function App() {
   const [isTasksMenuOpen, setTasksMenuOpen] = useState(true);
   const [isCalendarMenuOpen, setCalendarMenuOpen] = useState(false);
   const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
   const [isSettingsMenuOpen, setSettingsMenuOpen] = useState(false);
-  const [aiData, setAiData] = useState([]);
+
   const [file, setFile] = useState(null);
+  const [aiData, setAiData] = useState(null);
+  const timerManagerRef = useRef();
 
   const toggleMenus = (open, id) => (event) => {
     if (
@@ -50,6 +54,12 @@ function App() {
     }
   };
 
+  const addTimer = () => {
+    if (timerManagerRef.current) {
+      timerManagerRef.current.addTimer();
+    }
+  };
+
   const handleUpload = (e) => {
     e.preventDefault();
     if (!file) {
@@ -77,7 +87,7 @@ function App() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
-      <NavBar toggleMenus={toggleMenus} aiData={aiData} />
+      <NavBar toggleMenus={toggleMenus} aiData={aiData} addTimer={addTimer} />
       <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>
         <Box
           sx={[
@@ -106,6 +116,7 @@ function App() {
           Settings
         </Box>
       </Box>
+      <TimerManager ref={timerManagerRef} />
     </Box>
   );
 }
