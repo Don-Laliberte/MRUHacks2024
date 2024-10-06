@@ -70,7 +70,6 @@ export default function KanbanBoard(aiData) {
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
-
   const columnCount = Object.keys(columns).length;
   const totalColumnWidth =
     columnCount * COLUMN_WIDTH + (columnCount - 1) * COLUMN_GAP;
@@ -242,15 +241,8 @@ export default function KanbanBoard(aiData) {
       let newColumnId = generateId();
       addAiColumn(newColumnId);
       appendColumn(placeHolderColumns);
-      aiData.forEach((element, i) => {
-          addAiCard(
-            i,
-            element.summary,
-            "Click here to edit",
-            element.start,
-            element.end
-          );
-      });
+      console.log(aiData);
+      aiData.map(data => addAiCard(newColumnId,data.summary,"Click to Edit", data.start, data.end));
     }
   };
 

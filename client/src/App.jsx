@@ -1,9 +1,7 @@
 import Box from "@mui/material/Box";
 import NavBar from "./components/NavBar";
-import { Typography } from "@mui/material";
 import { useState, useRef } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
 import axios from "axios";
 import KanbanBoard from "./components/board/KanbanBoard.jsx";
 import TimerManager from "./components/timer/TimerManager.jsx";
@@ -15,7 +13,7 @@ function App() {
   const [isSettingsMenuOpen, setSettingsMenuOpen] = useState(false);
 
   const [file, setFile] = useState(null);
-  const [aiData, setAiData] = useState(null);
+  const [aiData, setAiData] = useState([]);
   const timerManagerRef = useRef();
 
   const toggleMenus = (open, id) => (event) => {
@@ -68,15 +66,25 @@ function App() {
 
     const fd = new FormData();
     fd.append("file", file);
+    
     axios
       .post("http://localhost:3000/api/upload", fd)
       .then((response) => {
         console.log(response.data);
         handleData([...response.data]);
+        //aiData.map(data=>console.log(data)) 
       })
       .catch((error) => {
         console.error("Error uploading file:", error);
       });
+
+
+      axios.post("http://localhost:3000/api/gptresponse", fd)
+      .then((response) => {
+        console.log(response.data)
+      })
+      
+ 
   };
 
   function handleData(data) {
@@ -87,6 +95,7 @@ function App() {
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
       <NavBar toggleMenus={toggleMenus} aiData={aiData} addTimer={addTimer} />
+
       <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>
         <Box
           sx={[

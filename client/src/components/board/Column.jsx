@@ -70,7 +70,7 @@ export default function Column({
                 overflowY: 'auto',
               }}
             >
-              {column.items.map((item, index) => (
+              {column.items && column.items.map((item, index) => (
                 <Card 
                   key={item.id} 
                   item={item} 
