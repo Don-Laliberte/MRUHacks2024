@@ -71,8 +71,7 @@ function App() {
       .post("http://localhost:3000/api/upload", fd)
       .then((response) => {
         console.log(response.data);
-        handleData([...response.data]);
-        //aiData.map(data=>console.log(data)) 
+        setAiData([...response.data]);
       })
       .catch((error) => {
         console.error("Error uploading file:", error);
@@ -87,9 +86,6 @@ function App() {
  
   };
 
-  function handleData(data) {
-    setAiData(data);
-  }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
