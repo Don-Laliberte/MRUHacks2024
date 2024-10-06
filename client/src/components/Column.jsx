@@ -43,11 +43,10 @@ export default function Column({
             />
           ) : (
             <Typography
-              variant="h6"
               onClick={() => onTitleClick(columnId)}
               sx={{ cursor: 'pointer', flexGrow: 1, mr: 1 }}
             >
-              <Box>
+              <Box variant="h6">
                 {column.title}
               </Box>
             </Typography>

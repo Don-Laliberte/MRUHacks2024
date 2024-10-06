@@ -85,7 +85,20 @@ export default function KanbanBoard(aiData,setAiData) {
       ...prev,
       [newColumnId]: {
         id: newColumnId,
-        title: `New Column`,
+        title: "New Column",
+        items: []
+      }
+    }));
+  };
+
+  function addAiColumn (id) {
+    if (Object.keys(columns).length >= 6) return;
+
+    setColumns(prev => ({
+      ...prev,
+      [id]: {
+        id: newColumnId,
+        title: "Ai Tasks",
         items: []
       }
     }));
@@ -135,6 +148,18 @@ export default function KanbanBoard(aiData,setAiData) {
       }
     }));
   }, []);
+
+  function addAiCard (columnId, title, desc, startTime, endTime) {
+    const newCard = createItem(title, desc, startTime, endTime);
+
+    setColumns(prev => ({
+      ...prev,
+      [columnId]: {
+        ...prev[columnId],
+        items: [...prev[columnId].items, newCard]
+      }
+    }));
+  };
 
   const handleCardClick = (columnId, card) => {
     setSelectedCard(prev => prev && prev.id === card.id ? null : { ...card, columnId });
@@ -190,7 +215,12 @@ export default function KanbanBoard(aiData,setAiData) {
 
   const addAiData = () => {
     if (aiData != null) {
-      
+      placeHolderColumns = columns
+      setColumns(null)
+      let newColumnId = generateId();
+      addAiColumn(newColumnId)
+      addAiCard(newColumnId)
+
     }
   }
 
