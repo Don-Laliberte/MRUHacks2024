@@ -5,9 +5,6 @@ const gptSender = require('../calenderAssistantService.js');
 
 const route = Router();
 
-route.get('/', (req, res) => {
-  res.send('ok');
-});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -20,9 +17,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+route.post("/gptresponse", upload.single('file'),(req, res) => {
+  const filePath = path.resolve(__dirname, `../uploads/${req.file.filename}`);
+  console.log(1)
+  gptSender(filePath, res, 1); // Pass the dynamic file path to gptSender
+})
+
 route.post("/upload", upload.single('file'), (req, res) => {
   const filePath = path.resolve(__dirname, `../uploads/${req.file.filename}`);
-  gptSender(filePath, res); // Pass the dynamic file path to gptSender
+  console.log(2)
+  gptSender(filePath, res, 2); // Pass the dynamic file path to gptSender
 });
 
 module.exports = route;
