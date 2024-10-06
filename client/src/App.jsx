@@ -3,7 +3,6 @@ import NavBar from "./components/navbar";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import KanbanBoard from "./components/KanbanBoard";
 import Container from "@mui/material/Container";
 
 function App() {
@@ -55,7 +54,6 @@ function App() {
         <Box>
           <Typography>
             <Box sx={[{p:10},!isTasksMenuOpen && { display: "none" }]}>
-              <KanbanBoard></KanbanBoard>
             </Box>
             <Box
               fontSize={500}
