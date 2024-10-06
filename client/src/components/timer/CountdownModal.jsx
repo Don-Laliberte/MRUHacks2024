@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button, IconButton } from "@mui/material";
-import Draggable from "react-draggable";
+import { Draggable } from "react-beautiful-dnd";
 import CloseIcon from "@mui/icons-material/Close";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";

@@ -15,7 +15,6 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import UploadFile from '../UploadFile';
 import Column from './Column';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 

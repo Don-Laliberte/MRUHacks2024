@@ -6,7 +6,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import KanbanBoard from "./components/board/KanbanBoard.jsx";
-import UploadFile from "./components/UploadFile.jsx";
 import TimerManager from "./components/timer/TimerManager.jsx";
 
 function App() {
