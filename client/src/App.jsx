@@ -48,35 +48,39 @@ function App() {
   };
 
   return (
-    <Box sx={{display:"inline-flex"}}>
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
-      <NavBar toggleMenus={toggleMenus}></NavBar>
-      <Container>
-        <Box>
-          <Typography>
-            <Box sx={[{p:10},!isTasksMenuOpen && { display: "none" }]}>
-            </Box>
-            <Box
-              fontSize={500}
-              sx={[!isCalendarMenuOpen && { display: "none" }]}
-            >
-              Calendar
-            </Box>
-            <Box
-              fontSize={500}
-              sx={[!isProfileMenuOpen && { display: "none" }]}
-            >
-              Profile
-            </Box>
-            <Box
-              fontSize={500}
-              sx={[!isSettingsMenuOpen && { display: "none" }]}
-            >
-              Settings
-            </Box>
-          </Typography>
+      <NavBar toggleMenus={toggleMenus} />
+      <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>
+        <Box sx={[
+          { 
+            pt: 8,
+            width: '100%', // Ensure full width
+            boxSizing: 'border-box', // Include padding in width calculation
+          },
+          !isTasksMenuOpen && { display: "none" }
+        ]}>
+          <KanbanBoard />
         </Box>
-      </Container>
+        <Box
+          fontSize={500}
+          sx={[!isCalendarMenuOpen && { display: "none" }]}
+        >
+          Calendar
+        </Box>
+        <Box
+          fontSize={500}
+          sx={[!isProfileMenuOpen && { display: "none" }]}
+        >
+          Profile
+        </Box>
+        <Box
+          fontSize={500}
+          sx={[!isSettingsMenuOpen && { display: "none" }]}
+        >
+          Settings
+        </Box>
+      </Box>
     </Box>
   );
 }
